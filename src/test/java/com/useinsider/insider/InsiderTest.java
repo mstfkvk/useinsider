@@ -6,14 +6,8 @@ import com.useinsider.insider.page.Careers_QAPage;
 import com.useinsider.insider.page.HomePage;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InsiderTest {
-    private HomePage homePage;
-    private CareersPage careersPage;
-    private Careers_QAPage qaPage;
-    private CareersOpenPositionsPage openPositonPage;
 
 
     @BeforeEach
@@ -27,11 +21,11 @@ public class InsiderTest {
     }
 
     @Test
-    public void toolsMenu() throws InterruptedException {
-        homePage = new HomePage();
-        careersPage = new CareersPage();
-        qaPage = new Careers_QAPage();
-        openPositonPage = new CareersOpenPositionsPage();
+    public void toolsMenu() {
+        HomePage homePage = new HomePage();
+        CareersPage careersPage = new CareersPage();
+        Careers_QAPage qaPage = new Careers_QAPage();
+        CareersOpenPositionsPage openPositionPage = new CareersOpenPositionsPage();
 
 
 //      1- Visit https://useinsider.com/
@@ -57,33 +51,33 @@ public class InsiderTest {
         qaPage.clickOnSeeAllQAJobsButton();
 
 //      7- Filter jobs by Location: "Istanbul, Turkey"
-        openPositonPage.selectDesiredLocation("Istanbul, Turkey");
+        openPositionPage.selectDesiredLocation("Istanbul, Turkey");
 
 //      8- And filter Department: "Quality Assurance"
-        openPositonPage.selectDesiredDepartment("Quality Assurance");
+        openPositionPage.selectDesiredDepartment("Quality Assurance");
 
 //      9- Check the presence of the jobs list
-        openPositonPage.assertSelectedFilters("Istanbul, Turkey", "Quality Assurance");
+        openPositionPage.assertSelectedFilters("Istanbul, Turkey", "Quality Assurance");
         Utility.waitUntilPageIsLoaded(10);
-        openPositonPage.checkPresenceOfOpenPositions();
+        openPositionPage.checkPresenceOfOpenPositions();
 
 //      10- Check that all jobs’ Position contains "Quality Assurance"
-        openPositonPage.assertPositionTitle("Quality Assurance");
+        openPositionPage.assertPositionTitle("Quality Assurance");
 
 //      11- Check that all jobs’ Department contains "Quality Assurance"
-        openPositonPage.assertPositionDepartment("Quality Assurance");
+        openPositionPage.assertPositionDepartment("Quality Assurance");
 
 //      12- And Check that all jobs’ Location contains "Istanbul, Turkey"
-        openPositonPage.assertPositionLocation("Istanbul, Turkey");
+        openPositionPage.assertPositionLocation("Istanbul, Turkey");
 
 //      13- Click the "View Role" button
-        openPositonPage.viewRoleRandomly();
+        openPositionPage.viewRoleRandomly();
 
 //      14- Check that this action redirects us to the Lever Application form page
         Utility.switchToNewWindow();
         Utility.waitUntilPageIsLoaded(10);
 
-        openPositonPage.assertLeverAppPage();
+        openPositionPage.assertLeverAppPage();
     }
 
 }

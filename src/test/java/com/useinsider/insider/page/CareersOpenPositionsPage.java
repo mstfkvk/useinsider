@@ -2,19 +2,13 @@ package com.useinsider.insider.page;
 
 import com.useinsider.insider.Driver;
 import com.useinsider.insider.Utility;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import javax.annotation.concurrent.ThreadSafe;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,8 +24,6 @@ public class CareersOpenPositionsPage extends CareersPage {
     @FindBy(css = "#filter-by-location")
     public WebElement filterByLocationWithSelect;
 
-    @FindBy(css = "#filter-by-location option")
-    public List<WebElement> filterByLocationOptionsInSelect;
 
 
     Select selectLocation;
@@ -52,14 +44,11 @@ public class CareersOpenPositionsPage extends CareersPage {
     @FindBy(css = "#filter-by-department")
     public WebElement filterByDepartmentWithSelect;
 
-    @FindBy(css = "#filter-by-location option")
-    public List<WebElement> filterByDepartmentOptionsInSelect;
 
     Select selectDepartment;
 
     public void selectDesiredDepartment(String department) {
         Utility.waitUntilAllElementHas(By.cssSelector("#filter-by-department option"), 16, 10);
-        //Utility.justWait(filterByLocationWithSelect, 1);
 
         selectDepartment = new Select(filterByDepartmentWithSelect);
         Utility.selectDesiredOption(selectDepartment, department);
@@ -92,7 +81,7 @@ public class CareersOpenPositionsPage extends CareersPage {
 
     public void checkPresenceOfOpenPositions() {
         Utility.justWait(numberOfOpenPositions, 5);
-        boolean b = listOfOpenPositions.size() > 0;
+        boolean b = !listOfOpenPositions.isEmpty();
         assertTrue(b, "There are more than one open positions in the list");
         assertEquals(numberOfOpenPositions.getText(), "4", "Another verification, There are 4 open positions in the list");
     }
@@ -154,7 +143,7 @@ public class CareersOpenPositionsPage extends CareersPage {
     public void viewRoleRandomly() {
         if (listOfViewRoleButtons.isEmpty()) {
             System.out.println("There are no 'View Role' buttons in the list");
-            return; // Exit the method if the list is empty
+            return;
         }
 
         // Generate a random index within the bounds of the list size

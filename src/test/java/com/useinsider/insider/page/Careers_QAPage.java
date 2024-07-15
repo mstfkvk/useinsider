@@ -1,10 +1,8 @@
 package com.useinsider.insider.page;
 
 import com.useinsider.insider.Driver;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 // page_url = https://useinsider.com/careers/quality-assurance/
 public class Careers_QAPage extends CareersPage {
